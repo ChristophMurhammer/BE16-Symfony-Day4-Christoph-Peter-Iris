@@ -1,4 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-   index
+   <h2 class="page-header"> Streaming and Content-Creator Gear </h2>
+
+   <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Producer</th>
+                <th>Price</th>
+                <th>Beginner Friendly</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Name<td>
+                <td>Type</td>
+                <td>Producer</td>
+                <td>Price</td>
+                <td>
+                    <a href="/details/1" class="btn btn-info">Details</a>
+                    <a href="/edit/1" class="btn btn-warning">Edit</a>
+                    <a href="/delete/1" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+   
+   </table>
 {% endblock %}

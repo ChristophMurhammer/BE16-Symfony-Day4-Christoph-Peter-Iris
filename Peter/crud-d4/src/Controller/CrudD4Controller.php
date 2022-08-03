@@ -36,10 +36,10 @@ class CrudD4Controller extends AbstractController
         ]);
     }
 
-    // #[Route('/delete/{id}', name: 'app_crud_delete')]
-    // public function delete(): Response
-    // {
-    //     return $this->render('crud_d4/delete.html.twig', [
-    //     ]);
-    // }
+    #[Route('/delete/{id}', name: 'app_crud_delete')]
+    public function delete(): Response
+    {
+        return $this->render('crud_d4/delete.html.twig', [
+        ]);
+    }
 }
