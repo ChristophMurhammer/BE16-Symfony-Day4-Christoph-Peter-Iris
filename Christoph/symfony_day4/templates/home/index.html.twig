@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">{{message}}</div>
+<h2 class="page-header">Our products</h2>
+{% endfor %}
+<div class="row">
+{% for product in products %}
+<div class="col-sm-3">
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">{{product.name}}</h5>
+<p class="card-text">Price: € {{product.price}}</p>
+<a href="/details/{{product.id}}" class="btn btn-success">Details</a>
+<a href="/edit/{{product.id}}" class="btn btn-default">Edit</a>
+<a href="/delete/{{product.id}}" class="btn btn-danger">Delete</a>
+</div></div></div>
+{% endfor %}
+</div>
+{% endblock %}
