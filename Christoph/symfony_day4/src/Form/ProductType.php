@@ -26,6 +26,9 @@ class ProductType extends AbstractType
               'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
           ->add('picture', FileType::class, [
+              'data_class' => null,
+              'required' => false,
+              'empty_data' => '',
               'label' => 'Upload picture',
               'mapped' => 'false',
               'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px'],

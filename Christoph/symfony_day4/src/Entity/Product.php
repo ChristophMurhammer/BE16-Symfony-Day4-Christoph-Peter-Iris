@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Service\FileUploader;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -16,8 +17,8 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $picture = null;
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $picture = 'default.png';
 
     #[ORM\Column]
     private ?int $price = null;
@@ -47,7 +48,7 @@ class Product
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
