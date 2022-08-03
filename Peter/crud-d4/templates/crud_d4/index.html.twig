@@ -14,20 +14,30 @@
                 <th></th>
             </tr>
         </thead>
+        {% for gear,beginner in gears, beginners %}
+            
         <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td>Name</td>
-                <td>Type</td>
-                <td>Producer</td>
-                <td>Price</td>
-                <td>Beginner Friendly</td>
+                <th scope="row">{{gear.id}}</th>
+                <td>{{gear.ame}}</td>
+                <td>{{gear.type}}</td>
+                <td>{{gear.producer}}</td>
+                <td>{{gear.price}}</td>
+                <td>Test</td>
+                {% if {{beginner.fk_beginner_id}} == 1 %}
+                    <td>No</td>
+                {% endif %}
+                {% if {{beginner.fk_beginner_id}} == 2 %}
+                    <td>Yes</td>
+                {% endif %}
                 <td>
                     <a href="/details/1" class="btn btn-info">Details</a>
                     <a href="/edit/1" class="btn btn-warning">Edit</a>
                     <a href="/delete/1" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
+        {% endfor %}
+
         </tbody>
    </table>
 {% endblock %}
