@@ -45,18 +45,27 @@ class CRUDController extends AbstractController
     }
     
     #[Route('/edit/{id}', name: 'app_update')]
-    public function edit($id, Request $request, ManagerRegistry $doctrine): Response
-    {
+    public function edit($id, Request $request, ManagerRegistry $doctrine, FileUploader $fileUploader): Response
+    {   
+        $product = new Product();
         $product = $doctrine->getRepository(Product::class)->find($id);
+        $picture_old = $product->getPicture();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
+            $picture = $form->get('picture')->getData();
+            if($picture) {
+                $fileName = $fileUploader->upload($picture);
+                $product->setPicture($fileName);
+            }else {
+                $product->setPicture($picture_old);
+            }
             $em = $doctrine->getManager();
             $em->persist($product);
             $em->flush();
 
-            $this->addFlash("success", "Product successfully updated");
+            $this->addFlash("success", "Product successfully added");
             return $this->redirectToRoute('app_home');
         }
         return $this->render('crud/edit.html.twig', [
