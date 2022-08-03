@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
    <h2 class="page-header"> Streaming and Content-Creator Gear </h2>
 
    <table class="table table-striped">
@@ -14,30 +19,22 @@
                 <th></th>
             </tr>
         </thead>
-        {% for gear,beginner in gears, beginners %}
-            
+        {% for gear in gears %}
         <tbody>
-            <tr>
+            <tr>  
                 <th scope="row">{{gear.id}}</th>
-                <td>{{gear.ame}}</td>
+                <td>{{gear.name}}</td>
                 <td>{{gear.type}}</td>
                 <td>{{gear.producer}}</td>
                 <td>{{gear.price}}</td>
-                <td>Test</td>
-                {% if {{beginner.fk_beginner_id}} == 1 %}
-                    <td>No</td>
-                {% endif %}
-                {% if {{beginner.fk_beginner_id}} == 2 %}
-                    <td>Yes</td>
-                {% endif %}
-                <td>
+                <td>{{gear.fkBegginer}}</td>
+                {# <td>
                     <a href="/details/1" class="btn btn-info">Details</a>
                     <a href="/edit/1" class="btn btn-warning">Edit</a>
                     <a href="/delete/1" class="btn btn-danger">Delete</a>
-                </td>
+                </td> #}
             </tr>
         {% endfor %}
-
         </tbody>
    </table>
 {% endblock %}

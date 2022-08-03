@@ -27,7 +27,7 @@ class Gear
     private ?string $price = null;
 
     #[ORM\ManyToOne]
-    private ?beginner $fk_beginner = null;
+    private ?Beginner $fk_beginner = null;
 
     public function getId(): ?int
     {

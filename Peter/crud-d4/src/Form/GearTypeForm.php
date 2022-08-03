@@ -8,8 +8,8 @@ use App\Entity\Beginner;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 // use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-// use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+// use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -33,10 +33,14 @@ class GearTypeForm extends AbstractType
           ->add('price', NumberType::class,[
                 'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
-          ->add('fk_beginner_id', EntityType::class,[
-                'class' => Beginner::class,
-                'choice_lable'=> 'beginnerfriendly'
+          ->add('fk_beginner', EntityType::class, [
+            'class' => Beginner::class,
+            'choice_label' => 'beginnerfriendly'
+          ],
+          [
+                'attr' =>['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
+        
           ;
   }
 

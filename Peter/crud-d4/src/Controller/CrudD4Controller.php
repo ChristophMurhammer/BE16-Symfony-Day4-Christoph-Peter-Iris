@@ -12,15 +12,23 @@ use App\Form\GearTypeForm;
 use Symfony\Component\HttpFoundation\Request;
 
 class CrudD4Controller extends AbstractController
-{
+{   
     #[Route('/', name: 'app_crud_index')]
-    public function index(ManagerRegistry $doctrine): Response
-    {   
+    public function index(ManagerRegistry $doctrine):Response
+    {
         $gears = $doctrine->getRepository(Gear::class)->findAll();
-        return $this->render('crud_d4/index.html.twig', [
+        return $this->render('crud_d4/index.html.twig',[
             'gears' => $gears
         ]);
     }
+    // #[Route('/', name: 'app_crud_index')]
+    // public function index(ManagerRegistry $doctrine): Response
+    // {   
+    //     $gears = $doctrine->getRepository(Gear::class)->findAll();
+    //     return $this->render('crud_d4/index.html.twig', [
+    //         'gears' => $gears
+    //     ]);
+    // }
 
     #[Route('/create', name: 'app_crud_create')]
     public function create(Request $request, ManagerRegistry $doctrine): Response
