@@ -50,9 +50,26 @@ class CrudD4Controller extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_crud_edit')]
-    public function edit(): Response
-    {
+    public function edit(Request $request, ManagerRegistry $doctrine, $id): Response
+    {   
+        $gear =$doctrine->getRepository(Gear::class)->find($id);
+        $form = $this->createForm(GearTypeForm::class, $gear);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()&& $form->isValid()) {
+            
+            $gear = $form->getData();
+            $em = $doctrine->getManager();
+            $em->persist($gear);
+            $em->flush();
+            
+            $this->addFlash(
+                'notice',
+                'Gear Edited'
+            );
+            return $this->redirectToRoute('app_crud_index');
+        }
         return $this->render('crud_d4/edit.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
@@ -66,9 +83,17 @@ class CrudD4Controller extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'app_crud_delete')]
-    public function delete(): Response
-    {
-        return $this->render('crud_d4/delete.html.twig', [
-        ]);
-    }
+    public function delete(ManagerRegistry $doctrine, $id): Response
+    {   
+        $gear = $doctrine->getRepository(Gear::class)->find($id);
+        $em =$doctrine->getManager();
+        $em->remove($gear);
+        $em->flush();
+        $this->addFlash(
+            'Success',
+            'Entry deleted'
+        );
+        return $this->redirectToRoute('app_crud_index');
+    }   
+        
 }

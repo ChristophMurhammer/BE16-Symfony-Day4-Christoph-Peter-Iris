@@ -16,7 +16,7 @@
                 <th>Producer</th>
                 <th>Price</th>
                 <th>Beginner Friendly</th>
-                <th></th>
+                <th><a href="/create" class="btn btn-success" btn-md>Create New</a></th>
             </tr>
         </thead>
         {% for gear in gears %}
@@ -30,8 +30,8 @@
                 <td>{{gear.fkBeginner.friendly}}</td> {# nur fkBeginner zeigt auf objekt .friendly auf den inhalt #}
                 <td>
                     <a href="/details/{{gear.id}}" class="btn btn-info">Details</a>
-                 {#   <a href="/edit/1" class="btn btn-warning">Edit</a>
-                    <a href="/delete/1" class="btn btn-danger">Delete</a>#}
+                    <a href="/edit/{{gear.id}}" class="btn btn-warning">Edit</a>
+                    <a href="/delete/{{gear.id}}" class="btn btn-danger">Delete</a>
                 </td> 
             </tr>
         {% endfor %}

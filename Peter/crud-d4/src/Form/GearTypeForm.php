@@ -7,8 +7,6 @@ use App\Entity\Beginner;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
-// use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -41,9 +39,10 @@ class GearTypeForm extends AbstractType
                 'attr' =>['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
           ->add('Submit', SubmitType::class, [
-            'label' => 'Create new Gear',
-            'attr' => ['class' => 'btn-info', 'style' => 'margin-bottom:15px']
+            'label' => 'Submit',
+            'attr' => ['class' => 'btn-info mt-5', 'style' => 'margin-bottom:15px']
           ])
+
         
           ;
   }
