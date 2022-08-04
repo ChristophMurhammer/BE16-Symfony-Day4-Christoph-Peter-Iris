@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-   <hr>
-   <h2 class="page-header">{{gears.gearName}}</h2>
-   <ul>
-      <li>Name:            {{gears.gearName}}</li>
-      <li>Category:        {{gears.gearType}}</li>
-      <li>Producer:        {{gears.gearProducer}}</li>
-      <li>Price:           {{gears.gearPrice}}</li>
-      <li>For Beginners:   {{gears.gearName}}</li>
-   </ul>
-   <a href="/" class="btn btn-primary">Back</a>
+   
+   <div class="d-div mt-3 mx-3 mb-5 pb-3 pe-5">
+      <div class="container d-flex flex-column justify-content-center df-div">
+         <h2 class="page-header text-center">{{gears.gearName}}</h2>
+         <ul class="d-flex flex-column justify-content-center">
+            <img class="img-fluid d-image" src="{{ asset('pictures/' ~ gears.getGearImage()) }}" alt="">
+            {# <li><img src="{{asset('public/pictures/' ~ gears.getGearImage())}}" alt=""></li> #}
+            <li>Name:            {{gears.gearName}}</li>
+            <li>Category:        {{gears.gearType}}</li>
+            <li>Producer:        {{gears.gearProducer}}</li>
+            <li>Price:           {{gears.gearPrice}}</li>
+            <li>For Beginners:   {{gears.gearName}}</li>
+         </ul>
+         <a href="/" class="btn btn-primary btn-md d-btn">Back</a>
+      </div>
+   </div>
 {% endblock %}

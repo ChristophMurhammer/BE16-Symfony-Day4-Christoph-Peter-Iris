@@ -29,6 +29,9 @@ class Gear
     #[ORM\ManyToOne]
     private ?Beginner $fkBeginner = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $gear_image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Gear
     public function setFkBeginner(?beginner $fkBeginner): self
     {
         $this->fkBeginner = $fkBeginner;
+
+        return $this;
+    }
+
+    public function getGearImage(): ?string
+    {
+        return $this->gear_image;
+    }
+
+    public function setGearImage(?string $gear_image): self
+    {
+        $this->gear_image = $gear_image;
 
         return $this;
     }

@@ -4,12 +4,14 @@ namespace App\Form;
 
 use App\Entity\Gear;
 use App\Entity\Beginner;
-
+use App\Service\FileUploader;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -38,14 +40,35 @@ class GearTypeForm extends AbstractType
           [
                 'attr' =>['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
-          ->add('Submit', SubmitType::class, [
-            'label' => 'Submit',
-            'attr' => ['class' => 'btn-info mt-5', 'style' => 'margin-bottom:15px']
-          ])
 
+          ->add('gear_image', FileType::class, [
+            'data_class' => null,
+            'required' => false,
+            'empty_data' => '',
+            'label' => 'Upload picture',
+            'mapped' => 'false',
+            'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px'],
+            'constraints' => [
+              new File([
+                  'maxSize' => '3092k',
+                  'mimeTypes' => [
+                      'image/png',
+                      'image/jpeg',
+                      'image/jpg'
+                  ],
+                  'mimeTypesMessage' => 'Please upload a valid image file',
+                    ])
+              ],
+            ])
+            ->add('Submit', SubmitType::class, [
+                  'label' => 'Submit',
+                  'attr' => ['class' => 'btn-info mt-5', 'style' => 'margin-bottom:15px']
+            ])
+            
         
           ;
   }
+
 
   public function configureOptions(OptionsResolver $resolver): void
   {

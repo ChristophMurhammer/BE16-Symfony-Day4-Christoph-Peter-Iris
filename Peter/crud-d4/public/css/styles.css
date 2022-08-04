@@ -1,0 +1,21 @@
+.d-image{
+    width: 25vw;
+    height: auto;
+}
+.d-div{
+    position: absolute;
+    border: 1px solid black;
+    
+}
+
+.df-div{
+    position: relative;
+    justify-content: center;
+}
+
+.d-btn{
+    width: 10rem;
+    /* position: relative; */
+
+    bottom: 10px
+}

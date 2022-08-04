@@ -11,6 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\GearTypeForm;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Service\FileUploader;
+
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class CrudD4Controller extends AbstractController
 {   
     #[Route('/', name: 'app_crud_index')]
@@ -24,24 +29,30 @@ class CrudD4Controller extends AbstractController
 
 
     #[Route('/create', name: 'app_crud_create')]
-    public function create(Request $request, ManagerRegistry $doctrine): Response
+    public function create(Request $request, ManagerRegistry $doctrine, FileUploader $fileUploader): Response
     {
         $gear = new Gear();
         $form = $this->createForm(GearTypeForm::class, $gear);
-
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
-            
             $gear = $form->getData();
+            $picture=$form->get('gear_image')->getData();
+            if($picture){
+                $filename = $fileUploader->upload($picture);
+                $gear->setGearImage($filename);
+            }else{
+                $filename = 'product.png';
+                $gear->setGearImage($filename);
+            }
             $em = $doctrine->getManager();
             $em->persist($gear);
             $em->flush();
             
             $this->addFlash(
-                'notice',
+                'success',
                 'Gear Added'
             );
-            return $this->redirectToRoute('app_crud_create');
+            return $this->redirectToRoute('app_crud_index');
         }
             
         return $this->render('crud_d4/create.html.twig', [
@@ -50,7 +61,7 @@ class CrudD4Controller extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_crud_edit')]
-    public function edit(Request $request, ManagerRegistry $doctrine, $id): Response
+    public function edit(Request $request, ManagerRegistry $doctrine,FileUploader $fileUploader, $id): Response
     {   
         $gear =$doctrine->getRepository(Gear::class)->find($id);
         $form = $this->createForm(GearTypeForm::class, $gear);
@@ -58,6 +69,15 @@ class CrudD4Controller extends AbstractController
         if ($form->isSubmitted()&& $form->isValid()) {
             
             $gear = $form->getData();
+            $picture=$form->get('gear_image')->getData();
+            if($picture){
+                $filename = $fileUploader->upload($picture);
+                $gear->setGearImage($filename);
+            }else{
+                $filename = 'product.png';
+                $gear->setGearImage($filename);
+            }
+
             $em = $doctrine->getManager();
             $em->persist($gear);
             $em->flush();
@@ -85,6 +105,7 @@ class CrudD4Controller extends AbstractController
     #[Route('/delete/{id}', name: 'app_crud_delete')]
     public function delete(ManagerRegistry $doctrine, $id): Response
     {   
+        // $gear = $doctrine->getRepository("App\Entity\Gear")->find($id); //funktioniert auch
         $gear = $doctrine->getRepository(Gear::class)->find($id);
         $em =$doctrine->getManager();
         $em->remove($gear);
