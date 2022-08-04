@@ -14,21 +14,21 @@ class Beginner
     private ?int $id = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    private ?string $friendly = null;
+    private ?string $beginnerfriendly = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFriendly(): ?string
+    public function getBeginnerfriendly(): ?string
     {
-        return $this->friendly;
+        return $this->beginnerfriendly;
     }
 
-    public function setFriendly(?string $friendly): self
+    public function setBeginnerfriendly(?string $beginnerfriendly): self
     {
-        $this->friendly = $friendly;
+        $this->beginnerfriendly = $beginnerfriendly;
 
         return $this;
     }

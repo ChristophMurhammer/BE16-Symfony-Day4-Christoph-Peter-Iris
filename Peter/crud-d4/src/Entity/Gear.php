@@ -14,82 +14,82 @@ class Gear
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 55)]
+    private ?string $gearName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    #[ORM\Column(length: 100)]
+    private ?string $gearType = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $producer = null;
+    #[ORM\Column(length: 55)]
+    private ?string $gearProducer = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
-    private ?string $price = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2)]
+    private ?string $gearPrice = null;
 
     #[ORM\ManyToOne]
-    private ?Beginner $fk_beginner = null;
+    private ?Beginner $fkBeginner = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getGearName(): ?string
     {
-        return $this->name;
+        return $this->gearName;
     }
 
-    public function setName(string $name): self
+    public function setGearName(string $gearName): self
     {
-        $this->name = $name;
+        $this->gearName = $gearName;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getGearType(): ?string
     {
-        return $this->type;
+        return $this->gearType;
     }
 
-    public function setType(string $type): self
+    public function setGearType(string $gearType): self
     {
-        $this->type = $type;
+        $this->gearType = $gearType;
 
         return $this;
     }
 
-    public function getProducer(): ?string
+    public function getGearProducer(): ?string
     {
-        return $this->producer;
+        return $this->gearProducer;
     }
 
-    public function setProducer(string $producer): self
+    public function setGearProducer(string $gearProducer): self
     {
-        $this->producer = $producer;
+        $this->gearProducer = $gearProducer;
 
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getGearPrice(): ?string
     {
-        return $this->price;
+        return $this->gearPrice;
     }
 
-    public function setPrice(?string $price): self
+    public function setGearPrice(string $gearPrice): self
     {
-        $this->price = $price;
+        $this->gearPrice = $gearPrice;
 
         return $this;
     }
 
     public function getFkBeginner(): ?beginner
     {
-        return $this->fk_beginner;
+        return $this->fkBeginner;
     }
 
-    public function setFkBeginner(?beginner $fk_beginner): self
+    public function setFkBeginner(?beginner $fkBeginner): self
     {
-        $this->fk_beginner = $fk_beginner;
+        $this->fkBeginner = $fkBeginner;
 
         return $this;
     }

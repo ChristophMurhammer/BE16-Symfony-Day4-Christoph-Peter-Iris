@@ -21,14 +21,7 @@ class CrudD4Controller extends AbstractController
             'gears' => $gears
         ]);
     }
-    // #[Route('/', name: 'app_crud_index')]
-    // public function index(ManagerRegistry $doctrine): Response
-    // {   
-    //     $gears = $doctrine->getRepository(Gear::class)->findAll();
-    //     return $this->render('crud_d4/index.html.twig', [
-    //         'gears' => $gears
-    //     ]);
-    // }
+
 
     #[Route('/create', name: 'app_crud_create')]
     public function create(Request $request, ManagerRegistry $doctrine): Response
@@ -38,10 +31,8 @@ class CrudD4Controller extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
-            $now =new \DateTime('now');
             
             $gear = $form->getData();
-            $gear->setCreateDate($now);
             $em = $doctrine->getManager();
             $em->persist($gear);
             $em->flush();
@@ -50,7 +41,7 @@ class CrudD4Controller extends AbstractController
                 'notice',
                 'Gear Added'
             );
-            return $this->redirectToRoute('gear');
+            return $this->redirectToRoute('app_crud_create');
         }
             
         return $this->render('crud_d4/create.html.twig', [
@@ -66,9 +57,11 @@ class CrudD4Controller extends AbstractController
     }
 
     #[Route('/details/{id}', name: 'app_crud_details')]
-    public function details(): Response
+    public function details(ManagerRegistry $doctrine, $id): Response
     {
+        $gears = $doctrine->getRepository(Gear::class)->find($id);
         return $this->render('crud_d4/details.html.twig', [
+            'gears' => $gears
         ]);
     }
 

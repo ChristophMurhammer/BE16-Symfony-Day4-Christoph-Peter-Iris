@@ -23,16 +23,16 @@
         <tbody>
             <tr>  
                 <th scope="row">{{gear.id}}</th>
-                <td>{{gear.name}}</td>
-                <td>{{gear.type}}</td>
-                <td>{{gear.producer}}</td>
-                <td>{{gear.price}}</td>
-                <td>{{gear.fkBegginer}}</td>
-                {# <td>
-                    <a href="/details/1" class="btn btn-info">Details</a>
-                    <a href="/edit/1" class="btn btn-warning">Edit</a>
-                    <a href="/delete/1" class="btn btn-danger">Delete</a>
-                </td> #}
+                <td>{{gear.gearName}}</td>
+                <td>{{gear.gearType}}</td>
+                <td>{{gear.gearProducer}}</td>
+                <td>{{gear.gearPrice}}</td>
+                <td>{{gear.fkBeginner.friendly}}</td> {# nur fkBeginner zeigt auf objekt .friendly auf den inhalt #}
+                <td>
+                    <a href="/details/{{gear.id}}" class="btn btn-info">Details</a>
+                 {#   <a href="/edit/1" class="btn btn-warning">Edit</a>
+                    <a href="/delete/1" class="btn btn-danger">Delete</a>#}
+                </td> 
             </tr>
         {% endfor %}
         </tbody>

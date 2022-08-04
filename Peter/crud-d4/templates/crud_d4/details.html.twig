@@ -1,4 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-   details
+   <hr>
+   <h2 class="page-header">{{gears.gearName}}</h2>
+   <ul>
+      <li>Name:            {{gears.gearName}}</li>
+      <li>Category:        {{gears.gearType}}</li>
+      <li>Producer:        {{gears.gearProducer}}</li>
+      <li>Price:           {{gears.gearPrice}}</li>
+      <li>For Beginners:   {{gears.gearName}}</li>
+   </ul>
+   <a href="/" class="btn btn-primary">Back</a>
 {% endblock %}
