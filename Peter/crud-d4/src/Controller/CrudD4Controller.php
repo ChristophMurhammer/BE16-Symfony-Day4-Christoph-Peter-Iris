@@ -13,9 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use App\Service\FileUploader;
 
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-
 class CrudD4Controller extends AbstractController
 {   
     #[Route('/', name: 'app_crud_index')]
@@ -36,10 +33,10 @@ class CrudD4Controller extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
             $gear = $form->getData();
-            $picture=$form->get('gear_image')->getData();
+            $picture=$form->get('gear_image')->getData();  //gear_image is the name of the column
             if($picture){
                 $filename = $fileUploader->upload($picture);
-                $gear->setGearImage($filename);
+                $gear->setGearImage($filename);  //setGearImage comes from Entity Setters and Getters
             }else{
                 $filename = 'product.png';
                 $gear->setGearImage($filename);
@@ -105,7 +102,7 @@ class CrudD4Controller extends AbstractController
     #[Route('/delete/{id}', name: 'app_crud_delete')]
     public function delete(ManagerRegistry $doctrine, $id): Response
     {   
-        // $gear = $doctrine->getRepository("App\Entity\Gear")->find($id); //funktioniert auch
+        // $gear = $doctrine->getRepository("App\Entity\Gear")->find($id); //works too
         $gear = $doctrine->getRepository(Gear::class)->find($id);
         $em =$doctrine->getManager();
         $em->remove($gear);

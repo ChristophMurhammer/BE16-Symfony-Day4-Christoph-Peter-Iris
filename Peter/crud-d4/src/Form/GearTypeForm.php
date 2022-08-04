@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Gear;
 use App\Entity\Beginner;
-use App\Service\FileUploader;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,7 +32,7 @@ class GearTypeForm extends AbstractType
           ->add('gear_price', NumberType::class,[
                 'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
-          ->add('fkBeginner', EntityType::class, [
+          ->add('fkBeginner', EntityType::class, [ //seems like camelCase and underline writing can be used
             'class' => Beginner::class,
             'choice_label' => 'friendly'
           ],
@@ -50,9 +49,9 @@ class GearTypeForm extends AbstractType
             'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px'],
             'constraints' => [
               new File([
-                  'maxSize' => '3092k',
+                  'maxSize' => '3092k', //default 1024k
                   'mimeTypes' => [
-                      'image/png',
+                      'image/png',        //can be expanded to more mimeTypes
                       'image/jpeg',
                       'image/jpg'
                   ],

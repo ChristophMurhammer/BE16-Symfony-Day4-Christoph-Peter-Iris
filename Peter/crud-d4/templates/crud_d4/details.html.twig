@@ -6,7 +6,8 @@
          <h2 class="page-header text-center">{{gears.gearName}}</h2>
          <ul class="d-flex flex-column justify-content-center">
             <img class="img-fluid d-image" src="{{ asset('pictures/' ~ gears.getGearImage()) }}" alt="">
-            {# <li><img src="{{asset('public/pictures/' ~ gears.getGearImage())}}" alt=""></li> #}
+            {#asset('...')...} points to the folder public; 
+               ~ concatonates the file, gears comes from controller .getGearImage from entities getters #}
             <li>Name:            {{gears.gearName}}</li>
             <li>Category:        {{gears.gearType}}</li>
             <li>Producer:        {{gears.gearProducer}}</li>
